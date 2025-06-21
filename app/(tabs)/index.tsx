@@ -6,10 +6,16 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { Colors } from '@/constants/Colors';
+
 export default function HomeScreen() {
+  const colorScheme = useColorScheme() ?? 'light';
+  const currentColors = Colors[colorScheme];
+
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerBackgroundColor={{ light: currentColors.primary, dark: currentColors.primary }}
       headerImage={
         <Image
           source={require('@/assets/images/partial-react-logo.png')}
