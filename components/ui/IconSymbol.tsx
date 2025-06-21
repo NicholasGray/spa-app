@@ -18,6 +18,9 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
+  'bubble.left.and.bubble.right.fill': 'chat',
+  'megaphone.fill': 'campaign',
+  'creditcard.fill': 'credit-card',
 } as IconMapping;
 
 /**
