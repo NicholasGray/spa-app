@@ -5,8 +5,7 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'defaultSubtitle' | 'label';
-  fontFamily?: 'Lato-Regular' | 'Lato-Bold' | 'SpaceMono'; // Add fontFamily prop
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
 };
 
 export function ThemedText({
@@ -14,30 +13,19 @@ export function ThemedText({
   lightColor,
   darkColor,
   type = 'default',
-  fontFamily = 'Lato-Regular', // Default to Lato-Regular
   ...rest
 }: ThemedTextProps) {
-  const themeTextColor = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
-  const linkColor = useThemeColor({}, 'tint'); // Use tint color for links
-
-  // Determine fontWeight based on fontFamily if it's Lato-Bold
-  const fontWeight = fontFamily === 'Lato-Bold' ? 'bold' : undefined;
-
-  const color = type === 'link' ? linkColor : themeTextColor;
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   return (
     <Text
       style={[
-        { color, fontFamily }, // Apply fontFamily
-        fontWeight ? { fontWeight } : {}, // Apply fontWeight if bold
+        { color },
         type === 'default' ? styles.default : undefined,
         type === 'title' ? styles.title : undefined,
         type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
         type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'defaultSubtitle' ? styles.defaultSubtitle : undefined,
-        // Link-specific color is now handled by the `color` variable above
         type === 'link' ? styles.link : undefined,
-        type === 'label' ? styles.label : undefined,
         style,
       ]}
       {...rest}
@@ -53,32 +41,20 @@ const styles = StyleSheet.create({
   defaultSemiBold: {
     fontSize: 16,
     lineHeight: 24,
-    fontFamily: 'Lato-Bold', // Use Lato-Bold for this style
+    fontWeight: '600',
   },
   title: {
     fontSize: 32,
-    lineHeight: 38, // Adjusted line height
-    fontFamily: 'Lato-Bold', // Use Lato-Bold
+    fontWeight: 'bold',
+    lineHeight: 32,
   },
   subtitle: {
     fontSize: 20,
-    fontFamily: 'Lato-Bold', // Use Lato-Bold
-    lineHeight: 28,
-  },
-  defaultSubtitle: { // New style
-    fontSize: 18,
-    lineHeight: 26,
-    fontFamily: 'Lato-Regular',
+    fontWeight: 'bold',
   },
   link: {
     lineHeight: 30,
     fontSize: 16,
-    // color is now handled dynamically by useThemeColor({}, 'tint')
-    fontFamily: 'Lato-Regular',
+    color: '#0a7ea4',
   },
-  label: { // New style for smaller text, like input labels or captions
-    fontSize: 14,
-    lineHeight: 20,
-    fontFamily: 'Lato-Regular',
-  }
 });

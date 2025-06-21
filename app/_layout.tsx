@@ -8,19 +8,12 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded, error] = useFonts({
+  const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    'Lato-Regular': require('../assets/fonts/Lato-Regular.ttf'),
-    'Lato-Bold': require('../assets/fonts/Lato-Bold.ttf'),
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  React.useEffect(() => {
-    if (error) throw error;
-  }, [error]);
-
   if (!loaded) {
-    // Async font loading can occur in development.
+    // Async font loading only occurs in development.
     return null;
   }
 
