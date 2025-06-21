@@ -11,20 +11,17 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
   const [isOpen, setIsOpen] = useState(false);
   const theme = useColorScheme() ?? 'light';
 
-  const theme = useColorScheme() ?? 'light';
-  const currentColors = Colors[theme];
-
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView>
       <TouchableOpacity
-        style={[styles.heading, { backgroundColor: currentColors.card }]}
+        style={styles.heading}
         onPress={() => setIsOpen((value) => !value)}
         activeOpacity={0.8}>
         <IconSymbol
           name="chevron.right"
           size={18}
           weight="medium"
-          color={currentColors.icon}
+          color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
           style={{ transform: [{ rotate: isOpen ? '90deg' : '0deg' }] }}
         />
 
@@ -36,22 +33,13 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
 }
 
 const styles = StyleSheet.create({
-  container: { // Added a container style for potential outer margins/padding if needed later
-    marginVertical: 4,
-    borderRadius: 8, // Add rounded corners
-    overflow: 'hidden', // Ensure background respects border radius
-    borderWidth: 1,
-    borderColor: currentColors.borderColor,
-  },
   heading: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10, // Increased gap
-    padding: 12, // Added padding
+    gap: 6,
   },
   content: {
-    marginTop: 1, // Separator line effect with container border
-    padding: 12, // Added padding to content area
+    marginTop: 6,
     marginLeft: 24,
   },
 });

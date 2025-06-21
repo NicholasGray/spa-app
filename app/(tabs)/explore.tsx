@@ -8,20 +8,14 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { Colors } from '@/constants/Colors';
-
 export default function TabTwoScreen() {
-  const colorScheme = useColorScheme() ?? 'light';
-  const currentColors = Colors[colorScheme];
-
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: currentColors.primary, dark: currentColors.primary }}
+      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
       headerImage={
         <IconSymbol
           size={310}
-          color={currentColors.tint} // Use theme-aware tint color
+          color="#808080"
           name="chevron.left.forwardslash.chevron.right"
           style={styles.headerImage}
         />
