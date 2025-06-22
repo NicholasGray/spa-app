@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 
+import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
+
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function ChatScreen() {
   const [message, setMessage] = useState('');
+  const theme = useColorScheme() ?? 'light';
 
   return (
     <ThemedView style={styles.container}>
@@ -20,7 +24,7 @@ export default function ChatScreen() {
           value={message}
           onChangeText={setMessage}
         />
-        <TouchableOpacity style={styles.sendButton}>
+        <TouchableOpacity style={[styles.sendButton, { backgroundColor: Colors[theme].tint }]}>
           <ThemedText style={styles.sendText}>Send</ThemedText>
         </TouchableOpacity>
       </ThemedView>
@@ -56,7 +60,6 @@ const styles = StyleSheet.create({
   sendButton: {
     paddingVertical: 8,
     paddingHorizontal: 12,
-    backgroundColor: '#0a7ea4',
     borderRadius: 8,
   },
   sendText: {

@@ -1,9 +1,13 @@
 import { Linking, StyleSheet, TouchableOpacity } from 'react-native';
 
+import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
+
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function PaymentsScreen() {
+  const theme = useColorScheme() ?? 'light';
   const handlePay = () => {
     Linking.openURL('https://example.com/payments');
   };
@@ -12,7 +16,7 @@ export default function PaymentsScreen() {
     <ThemedView style={styles.container}>
       <ThemedText type="title">Payments</ThemedText>
       <ThemedText style={styles.balance}>Outstanding Balance: $0.00</ThemedText>
-      <TouchableOpacity style={styles.payButton} onPress={handlePay}>
+      <TouchableOpacity style={[styles.payButton, { backgroundColor: Colors[theme].tint }]} onPress={handlePay}>
         <ThemedText style={styles.payText}>Go to Payment Portal</ThemedText>
       </TouchableOpacity>
     </ThemedView>
@@ -30,7 +34,6 @@ const styles = StyleSheet.create({
   payButton: {
     paddingVertical: 12,
     paddingHorizontal: 16,
-    backgroundColor: '#0a7ea4',
     borderRadius: 8,
     alignSelf: 'flex-start',
   },
